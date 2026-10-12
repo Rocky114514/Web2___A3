@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emberlight Foundation — Gold Coast charity events. Find a fun run, gala, concert or community drive and pass the torch of hope.">
+    <title>Emberlight Foundation — Pass the Torch</title>
+
+    <!-- 100% self-contained: no web fonts and no external CDN requests. -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ===================== Navigation (shared on all pages) ===================== -->
+    <header class="site-header">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand" aria-label="Emberlight Foundation home">
+                <!-- Animated flame mark. -->
+                <svg class="brand-mark" viewBox="0 0 64 96" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="brandFlame" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#ffd166"/>
+                            <stop offset="0.55" stop-color="#ff9d2e"/>
+                            <stop offset="1" stop-color="#ff6a00"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="flame-core" fill="url(#brandFlame)"
+                          d="M32 2 C19 22 6 36 6 58 a26 26 0 0 0 52 0 C58 36 45 22 32 2 Z"/>
+                    <path class="torch-inner" fill="#fff3d6" opacity="0.9"
+                          d="M32 26 C24 38 18 48 18 60 a14 14 0 0 0 28 0 C46 48 40 38 32 26 Z"/>
+                </svg>
+                <span class="brand-name">EMBERLIGHT <em>FOUNDATION</em></span>
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a class="nav-link active" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="search.html">Find an Event</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================ Hero ============================ -->
+        <section class="hero">
+            <div class="container hero__inner">
+                <p class="hero__kicker">Charity Events · Gold Coast</p>
+                <h1 class="hero__title">Pass the Torch.<br><span class="outline">Light the Dark.</span></h1>
+                <p class="hero__subtitle">
+                    When life goes dark, one act of courage can start a fire. Join a
+                    <strong>fun run</strong>, <strong>gala</strong>, <strong>concert</strong> or
+                    <strong>community drive</strong> — and hand your hope to the person who needs it next.
+                </p>
+                <div class="hero__actions">
+                    <a class="btn btn--primary" href="search.html">Find an event →</a>
+                    <a class="btn btn--ghost" href="#mission">Our mission</a>
+                </div>
+            </div>
+
+            <!-- The torch — the single bright object cutting through the shadow. -->
+            <svg class="hero__art" viewBox="0 0 200 320" aria-hidden="true">
+                <defs>
+                    <linearGradient id="torchOuter" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#ffd166"/>
+                        <stop offset="0.5" stop-color="#ff9d2e"/>
+                        <stop offset="1" stop-color="#ff5a00"/>
+                    </linearGradient>
+                    <linearGradient id="torchMetal" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#2b3a5c"/>
+                        <stop offset="0.5" stop-color="#6d7a9a"/>
+                        <stop offset="1" stop-color="#2b3a5c"/>
+                    </linearGradient>
+                </defs>
+                <!-- torch handle -->
+                <rect x="86" y="252" width="28" height="58" rx="10" fill="#151d30"/>
+                <rect x="86" y="252" width="28" height="58" rx="10" fill="none" stroke="#2b3a5c" stroke-width="2"/>
+                <!-- torch cup -->
+                <path d="M72 254 L128 254 L118 214 L82 214 Z" fill="url(#torchMetal)"/>
+                <!-- outer + inner flame -->
+                <path class="torch-flame" fill="url(#torchOuter)"
+                      d="M100 8 C76 44 52 70 52 108 a48 48 0 0 0 96 0 C148 70 124 44 100 8 Z"/>
+                <path class="torch-inner" fill="#fff3d6"
+                      d="M100 52 C86 78 74 96 74 116 a26 26 0 0 0 52 0 C126 96 114 78 100 52 Z"/>
+            </svg>
+
+            <!-- Rising ember particles — the animated flame effects restored in A3. -->
+            <div class="embers" aria-hidden="true">
+                <span class="ember"></span><span class="ember"></span><span class="ember"></span>
+                <span class="ember"></span><span class="ember"></span><span class="ember"></span>
+            </div>
+            <span class="hero__scroll">Scroll</span>
+        </section>
+
+        <!-- ======================= Impact statistics ======================= -->
+        <section class="section" id="stats">
+            <div class="container">
+                <div class="stats">
+                    <div class="stat"><div class="stat__num">13</div><div class="stat__label">Years of impact</div></div>
+                    <div class="stat"><div class="stat__num">$2.4M</div><div class="stat__label">Raised to date</div></div>
+                    <div class="stat"><div class="stat__num">6,800+</div><div class="stat__label">Volunteer torchbearers</div></div>
+                    <div class="stat"><div class="stat__num">120+</div><div class="stat__label">Events hosted</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ Mission ============================ -->
+        <section class="section section--tint" id="mission">
+            <div class="container">
+                <div class="section__head center">
+                    <p class="section__kicker">Who we are</p>
+                    <h2 class="section__title">A flame is only as bright as the <span class="fire">hands that carry it</span></h2>
+                    <p class="section__lead">
+                        Emberlight Foundation fights hunger, homelessness and youth disadvantage on the Gold Coast.
+                        We don't ask for pity — we ask for action. Every event is a relay, and you are the next runner.
+                    </p>
+                </div>
+                <div class="features">
+                    <article class="feature">
+                        <div class="feature__icon">🏃</div>
+                        <h3 class="feature__title">Run with purpose</h3>
+                        <p class="feature__text">Lace up for a fun run or charity walk where every stride funds hot meals and safe shelter.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature__icon">🤝</div>
+                        <h3 class="feature__title">Give with impact</h3>
+                        <p class="feature__text">Your ticket is a donation — 100% of proceeds flow to programs that change lives, fast.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature__icon">🔥</div>
+                        <h3 class="feature__title">Rise together</h3>
+                        <p class="feature__text">Join thousands of volunteers who keep the fire burning for families facing their darkest hour.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== Upcoming events (dynamic) ===================== -->
+        <section class="section" id="events">
+            <div class="container">
+                <div class="section__head center">
+                    <p class="section__kicker">What's coming up</p>
+                    <h2 class="section__title">Upcoming <span class="fire">Events</span></h2>
+                    <p class="section__lead">Every ticket is a torch passed to someone who needs a light.</p>
+                </div>
+                <!-- The grid is populated by home.js from GET /api/events/home. -->
+                <div class="events-grid" id="eventsGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- ============================ CTA band ============================ -->
+        <section class="cta-band">
+            <div class="container">
+                <h2>Be the spark<br>someone needs.</h2>
+                <p>Find the event that fits your fire and register a ticket today. It takes one click to start a chain reaction.</p>
+                <a class="btn btn--primary" href="search.html">Find your cause →</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================ Footer ============================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="index.html" class="brand">
+                        <svg class="brand-mark" viewBox="0 0 64 96" aria-hidden="true">
+                            <path class="flame-core" fill="url(#brandFlame)"
+                                  d="M32 2 C19 22 6 36 6 58 a26 26 0 0 0 52 0 C58 36 45 22 32 2 Z"/>
+                        </svg>
+                        <span class="brand-name">EMBERLIGHT <em>FOUNDATION</em></span>
+                    </a>
+                    <p>Passing the Torch of Hope since 2011 — turning ordinary tickets into extraordinary acts of courage.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html">Find an Event</a></li>
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="../admin/index.html">Staff Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:hello@emberlight.org.au">hello@emberlight.org.au</a></li>
+                        <li><a href="tel:1800555019">1800 555 019</a></li>
+                        <li><span>14 Lighthouse Way, Gold Coast QLD 4217</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>© 2026 Emberlight Foundation. A fictional charity for PROG2002 Assessment 3.</span>
+                <span>Built with HTML, CSS, JavaScript &amp; Node.js</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: config first, then shared helpers, then the page logic. -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
