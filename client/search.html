@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search Gold Coast charity events by date, location and category.">
+    <title>Find an Event — Emberlight Foundation</title>
+
+    <!-- 100% self-contained: no web fonts and no external CDN requests. -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ===================== Navigation (shared on all pages) ===================== -->
+    <header class="site-header">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand" aria-label="Emberlight Foundation home">
+                <svg class="brand-mark" viewBox="0 0 64 96" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="brandFlame" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#ffd166"/>
+                            <stop offset="0.55" stop-color="#ff9d2e"/>
+                            <stop offset="1" stop-color="#ff6a00"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="flame-core" fill="url(#brandFlame)"
+                          d="M32 2 C19 22 6 36 6 58 a26 26 0 0 0 52 0 C58 36 45 22 32 2 Z"/>
+                    <path class="torch-inner" fill="#fff3d6" opacity="0.9"
+                          d="M32 26 C24 38 18 48 18 60 a14 14 0 0 0 28 0 C46 48 40 38 32 26 Z"/>
+                </svg>
+                <span class="brand-name">EMBERLIGHT <em>FOUNDATION</em></span>
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li><a class="nav-link active" href="search.html">Find an Event</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- ======================== Page hero ======================== -->
+        <section class="page-hero">
+            <div class="container">
+                <h1 class="page-hero__title">Find <span class="fire">your cause</span></h1>
+                <p class="page-hero__sub">Filter active charity events by date, location and category — then click any result to see the full details and register.</p>
+            </div>
+        </section>
+
+        <!-- ======================== Filter form ======================== -->
+        <div class="container">
+            <form class="filter-card" id="filterForm" novalidate>
+                <div class="filter-form">
+                    <!-- Category dropdown: populated from GET /api/categories. -->
+                    <div class="form-field">
+                        <label class="form-label" for="categorySelect">Category</label>
+                        <select class="form-control" id="categorySelect" name="category">
+                            <option value="">All categories</option>
+                        </select>
+                    </div>
+
+                    <!-- Location dropdown: populated from GET /api/locations. -->
+                    <div class="form-field">
+                        <label class="form-label" for="locationSelect">Location</label>
+                        <select class="form-control" id="locationSelect" name="location">
+                            <option value="">All locations</option>
+                        </select>
+                    </div>
+
+                    <!-- Date picker: events on or after the chosen day. -->
+                    <div class="form-field">
+                        <label class="form-label" for="dateInput">Date (on or after)</label>
+                        <input class="form-control" type="date" id="dateInput" name="date">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn--primary">Search</button>
+                        <button type="button" class="btn btn--ghost" id="clearBtn">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- ======================== Results ======================== -->
+        <section class="section">
+            <div class="container">
+                <div class="results-head">
+                    <h2 class="section__title">Results</h2>
+                    <span class="results-count" id="resultsCount"></span>
+                </div>
+
+                <!-- Error messages are injected here by search.js (DOM manipulation). -->
+                <div id="message" aria-live="polite"></div>
+
+                <!-- Matching events are rendered into this grid. -->
+                <div class="events-grid" id="resultsGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================ Footer ============================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="index.html" class="brand">
+                        <svg class="brand-mark" viewBox="0 0 64 96" aria-hidden="true">
+                            <path class="flame-core" fill="url(#brandFlame)"
+                                  d="M32 2 C19 22 6 36 6 58 a26 26 0 0 0 52 0 C58 36 45 22 32 2 Z"/>
+                        </svg>
+                        <span class="brand-name">EMBERLIGHT <em>FOUNDATION</em></span>
+                    </a>
+                    <p>Passing the Torch of Hope since 2011 — turning ordinary tickets into extraordinary acts of courage.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html">Find an Event</a></li>
+                        <li><a href="index.html#mission">Our Mission</a></li>
+                        <li><a href="../admin/index.html">Staff Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:hello@emberlight.org.au">hello@emberlight.org.au</a></li>
+                        <li><a href="tel:1800555019">1800 555 019</a></li>
+                        <li><span>14 Lighthouse Way, Gold Coast QLD 4217</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>© 2026 Emberlight Foundation. A fictional charity for PROG2002 Assessment 3.</span>
+                <span>Built with HTML, CSS, JavaScript &amp; Node.js</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts. -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
