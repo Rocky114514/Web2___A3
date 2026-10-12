@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emberlight Foundation staff dashboard — manage charity events.">
+    <title>Event Dashboard — Emberlight Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- ======== Admin navigation (present on every admin page) ======== -->
+    <header class="admin-header">
+        <div class="container admin-nav">
+            <a href="index.html" class="admin-brand">
+                <span aria-hidden="true">🔥</span> EMBERLIGHT <span class="tag">Admin</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="admin-links" id="navLinks">
+                <li><a class="admin-link active" href="index.html">Events</a></li>
+                <li><a class="admin-link" href="new.html">New Event</a></li>
+                <li><a class="admin-link" href="edit.html">Update Event</a></li>
+                <li><a class="admin-link" href="../client/index.html">Client Site ↗</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <h1 class="page-title">Event <span class="fire">Dashboard</span></h1>
+            <p class="page-sub">
+                Every charity event in the database, whatever its status — Active, Past or Suspended.
+                This list is loaded from <code>GET /api/events?status=all</code>.
+            </p>
+
+            <!-- Feedback for delete attempts (including blocked deletions) -->
+            <div id="alertBox" aria-live="polite"></div>
+
+            <!-- Summary counters -->
+            <div class="admin-stats" id="stats"></div>
+
+            <div class="panel">
+                <div class="panel__head">
+                    <h2 class="panel__title">All events</h2>
+                    <div class="toolbar">
+                        <label class="hint" for="statusFilter">Filter:</label>
+                        <select class="form-control" id="statusFilter">
+                            <option value="all">All statuses</option>
+                            <option value="active">Active only</option>
+                            <option value="past">Past only</option>
+                            <option value="suspended">Suspended only</option>
+                        </select>
+                        <button class="btn btn--ghost btn--sm" id="refreshBtn" type="button">Refresh</button>
+                        <a class="btn btn--primary btn--sm" href="new.html">+ New event</a>
+                    </div>
+                </div>
+
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Event</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Price</th>
+                                <th>Registrations</th>
+                                <th>Goal progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <!-- Rows are written by list.js -->
+                        <tbody id="eventsBody">
+                            <tr><td colspan="9"><div class="skeleton"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-foot">
+        <div class="container">
+            Emberlight Foundation staff console · PROG2002 Assessment 3 ·
+            <a href="../client/index.html">Back to the public site</a>
+        </div>
+    </footer>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/list.js"></script>
+</body>
+</html>

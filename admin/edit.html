@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Update or delete a charity event — Emberlight Foundation staff console.">
+    <title>Update Event — Emberlight Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- ======== Admin navigation (present on every admin page) ======== -->
+    <header class="admin-header">
+        <div class="container admin-nav">
+            <a href="index.html" class="admin-brand">
+                <span aria-hidden="true">🔥</span> EMBERLIGHT <span class="tag">Admin</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="admin-links" id="navLinks">
+                <li><a class="admin-link" href="index.html">Events</a></li>
+                <li><a class="admin-link" href="new.html">New Event</a></li>
+                <li><a class="admin-link active" href="edit.html">Update Event</a></li>
+                <li><a class="admin-link" href="../client/index.html">Client Site ↗</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <h1 class="page-title">Update <span class="fire">an event</span></h1>
+            <p class="page-sub">
+                Select an event to edit its details and review its registrations.
+                Saving calls <code>PUT /api/events/:id</code>; deleting calls <code>DELETE /api/events/:id</code>.
+            </p>
+
+            <div id="alertBox" aria-live="polite"></div>
+
+            <!-- Event picker -->
+            <div class="panel">
+                <div class="panel__head">
+                    <h2 class="panel__title">Choose an event</h2>
+                    <div class="toolbar">
+                        <select class="form-control" id="eventSelect">
+                            <option value="">Loading…</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="hint" id="eventSummary">Select an event above to load its details.</p>
+            </div>
+
+            <!-- The shared event form is injected here -->
+            <div class="panel" id="formPanel">
+                <div class="empty-state"><span class="big">✏️</span>Select an event to edit it.</div>
+            </div>
+
+            <!-- Associated registrations for the selected event -->
+            <div class="panel" id="regPanel" hidden>
+                <div class="panel__head">
+                    <h2 class="panel__title">Registrations for this event</h2>
+                    <span class="hint" id="regCount"></span>
+                </div>
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ref</th><th>Attendee</th><th>Email</th><th>Phone</th>
+                                <th>Tickets</th><th>Total</th><th>Registered</th>
+                            </tr>
+                        </thead>
+                        <tbody id="regBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Delete (blocked by the API when registrations exist) -->
+            <div class="panel" id="dangerPanel" hidden>
+                <h2 class="panel__title">Delete this event</h2>
+                <p class="hint">
+                    Data-integrity rule: an event can only be deleted while it has
+                    <strong>no registrations</strong>. Otherwise the API returns an error and nothing is removed.
+                </p>
+                <button class="btn btn--danger" id="deleteBtn" type="button">Delete event</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-foot">
+        <div class="container">
+            Emberlight Foundation staff console · PROG2002 Assessment 3 ·
+            <a href="../client/index.html">Back to the public site</a>
+        </div>
+    </footer>
+
+    <script src="js/admin-common.js"></script>
+    <script src="js/event-form.js"></script>
+    <script src="js/edit.js"></script>
+</body>
+</html>

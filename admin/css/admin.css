@@ -1,0 +1,233 @@
+/* ============================================================================
+   admin.css — Staff (admin-side) website for the Emberlight Foundation
+   ----------------------------------------------------------------------------
+   Assessment 3, Part 4. The admin site shares the "Passing the Torch" palette
+   with the public site but uses a calmer, more utilitarian "control room"
+   layout: a sticky toolbar, data tables, status badges and dense forms.
+   This file is completely self-contained so the admin zip can be deployed on
+   its own.
+   ========================================================================== */
+
+:root {
+    --bg-0: #04060d;
+    --bg-1: #0a1020;
+    --bg-2: #101a30;
+    --bg-3: #17233d;
+    --bg-4: #233253;
+
+    --ember: #ff6a00;
+    --ember-2: #ff9d2e;
+    --gold: #ffc95c;
+    --flame-grad: linear-gradient(120deg, #ff6a00 0%, #ff9d2e 48%, #ffd166 100%);
+
+    --text: #f5f7fd;
+    --text-dim: #a9b6d1;
+    --text-mute: #6d7a9a;
+
+    --ok: #3ecf8e;
+    --warn: #ffc95c;
+    --danger: #ff5470;
+    --cool: #5b9bff;
+
+    --font-display: 'Arial Black', Impact, 'Segoe UI', system-ui, sans-serif;
+    --font-head: 'Arial Narrow', 'Segoe UI Semibold', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+    --radius: 14px;
+    --radius-sm: 9px;
+    --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg-0);
+    line-height: 1.55;
+    background-image:
+        radial-gradient(900px 520px at 88% -12%, rgba(255, 106, 0, 0.10), transparent 62%),
+        radial-gradient(800px 600px at -8% 35%, rgba(59, 88, 165, 0.14), transparent 60%);
+    background-attachment: fixed;
+}
+
+h1, h2, h3, h4 { margin: 0 0 0.5em; line-height: 1.15; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: #ffd166; }
+
+.container { width: min(1280px, 94%); margin-inline: auto; }
+
+/* --------------------------------------------------------------------------
+   Header / navigation — the menu is present on every admin page (requirement)
+   -------------------------------------------------------------------------- */
+.admin-header {
+    position: sticky; top: 0; z-index: 60;
+    background: rgba(4, 6, 13, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(245, 247, 253, 0.09);
+}
+.admin-nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 1rem; flex-wrap: wrap; }
+.admin-brand { display: flex; align-items: center; gap: 0.65rem; font-family: var(--font-display); letter-spacing: 0.03em; color: var(--text); }
+.admin-brand .tag {
+    font-family: var(--font-head); font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #1a0d00; background: var(--flame-grad);
+    padding: 0.15rem 0.5rem; border-radius: 999px;
+}
+.admin-links { display: flex; align-items: center; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+.admin-link {
+    font-family: var(--font-head); font-weight: 700; font-size: 0.98rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);
+    padding: 0.35rem 0; border-bottom: 2px solid transparent;
+}
+.admin-link:hover { color: var(--text); border-color: rgba(255, 122, 26, 0.6); }
+.admin-link.active { color: var(--gold); border-color: var(--gold); }
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--text); border-radius: 2px; }
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+.admin-main { padding: 40px 0 90px; }
+.page-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.5rem); text-transform: uppercase; }
+.page-title .fire { background: var(--flame-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.page-sub { color: var(--text-dim); max-width: 720px; margin-bottom: 1.6rem; }
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.68rem 1.35rem; border-radius: 999px; cursor: pointer;
+    font-family: var(--font-head); font-size: 0.98rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid transparent; transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn--primary { background: var(--flame-grad); color: #1a0d00; box-shadow: 0 0 28px rgba(255, 122, 26, 0.3); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 42px rgba(255, 122, 26, 0.5); }
+.btn--ghost { background: transparent; color: var(--text); border-color: rgba(245, 247, 253, 0.3); }
+.btn--ghost:hover { color: var(--gold); border-color: var(--gold); }
+.btn--danger { background: rgba(255, 84, 112, 0.16); color: var(--danger); border-color: rgba(255, 84, 112, 0.5); }
+.btn--danger:hover { background: rgba(255, 84, 112, 0.28); }
+.btn--sm { padding: 0.4rem 0.9rem; font-size: 0.82rem; }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* --------------------------------------------------------------------------
+   Stat cards
+   -------------------------------------------------------------------------- */
+.admin-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.8rem; }
+.stat-card {
+    background: var(--bg-2); border: 1px solid rgba(245, 247, 253, 0.08);
+    border-radius: var(--radius); padding: 1.1rem 1.2rem;
+}
+.stat-card .num { font-family: var(--font-display); font-size: 1.9rem; }
+.stat-card .cap { font-family: var(--font-head); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.76rem; color: var(--text-mute); }
+.stat-card.accent .num { background: var(--flame-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* --------------------------------------------------------------------------
+   Toolbar + panel
+   -------------------------------------------------------------------------- */
+.panel {
+    background: var(--bg-2); border: 1px solid rgba(245, 247, 253, 0.08);
+    border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow);
+}
+.panel + .panel { margin-top: 1.4rem; }
+.panel__title { font-family: var(--font-head); font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.panel__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+
+.toolbar { display: flex; gap: 0.7rem; align-items: center; flex-wrap: wrap; }
+.toolbar .form-control { width: auto; min-width: 180px; }
+
+/* --------------------------------------------------------------------------
+   Data table
+   -------------------------------------------------------------------------- */
+.table-scroll { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; min-width: 900px; }
+.data-table thead th {
+    text-align: left; padding: 0.7rem 0.8rem; white-space: nowrap;
+    font-family: var(--font-head); font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-mute);
+    border-bottom: 1px solid rgba(245, 247, 253, 0.14);
+}
+.data-table tbody td { padding: 0.72rem 0.8rem; border-bottom: 1px solid rgba(245, 247, 253, 0.06); vertical-align: middle; }
+.data-table tbody tr:hover { background: rgba(255, 122, 26, 0.06); }
+.data-table .name { font-weight: 700; color: var(--text); }
+.data-table .muted { color: var(--text-mute); font-size: 0.86rem; }
+.data-table .actions { display: flex; gap: 0.45rem; white-space: nowrap; }
+
+/* Status badges — Active / Past / Suspended */
+.status {
+    display: inline-block; padding: 0.2rem 0.65rem; border-radius: 999px;
+    font-family: var(--font-head); font-size: 0.74rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+}
+.status--active { background: rgba(62, 207, 142, 0.16); color: var(--ok); border: 1px solid rgba(62, 207, 142, 0.45); }
+.status--past { background: rgba(109, 122, 154, 0.18); color: var(--text-mute); border: 1px solid rgba(109, 122, 154, 0.4); }
+.status--suspended { background: rgba(255, 84, 112, 0.16); color: var(--danger); border: 1px solid rgba(255, 84, 112, 0.5); }
+.count-pill {
+    display: inline-block; min-width: 2rem; text-align: center;
+    padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 700;
+    background: rgba(255, 201, 92, 0.16); color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 1.2rem; }
+.form-grid .span-2 { grid-column: 1 / -1; }
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+.form-control {
+    font-family: var(--font-body); font-size: 0.98rem; color: var(--text);
+    background: var(--bg-0); border: 1px solid rgba(245, 247, 253, 0.16);
+    border-radius: var(--radius-sm); padding: 0.68rem 0.8rem; outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.form-control:focus { border-color: var(--ember-2); box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.22); }
+textarea.form-control { min-height: 92px; resize: vertical; font-family: var(--font-body); }
+.form-actions { display: flex; gap: 0.8rem; margin-top: 1.4rem; flex-wrap: wrap; }
+.field-error { display: none; font-size: 0.82rem; color: #ffb3c0; }
+.form-field.invalid .form-control { border-color: var(--danger); box-shadow: 0 0 0 3px rgba(255, 84, 112, 0.16); }
+.form-field.invalid .field-error { display: block; }
+.hint { font-size: 0.8rem; color: var(--text-mute); }
+
+/* --------------------------------------------------------------------------
+   Alerts
+   -------------------------------------------------------------------------- */
+.alert { padding: 0.95rem 1.15rem; border-radius: var(--radius-sm); margin-bottom: 1.2rem; font-weight: 500; }
+.alert--success { background: rgba(62, 207, 142, 0.13); border: 1px solid rgba(62, 207, 142, 0.45); color: #b6f2d6; }
+.alert--error { background: rgba(255, 84, 112, 0.13); border: 1px solid rgba(255, 84, 112, 0.45); color: #ffb3c0; }
+.alert--info { background: rgba(91, 155, 255, 0.13); border: 1px solid rgba(91, 155, 255, 0.4); color: #cfe0ff; }
+
+.empty-state { text-align: center; padding: 2.4rem 1rem; color: var(--text-mute); }
+.empty-state .big { font-size: 2.4rem; display: block; margin-bottom: 0.4rem; }
+.skeleton { min-height: 90px; border-radius: var(--radius-sm); background: linear-gradient(100deg, var(--bg-2) 40%, var(--bg-3) 50%, var(--bg-2) 60%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.site-foot { border-top: 1px solid rgba(245, 247, 253, 0.08); padding: 1.6rem 0; color: var(--text-mute); font-size: 0.86rem; }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .admin-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 720px) {
+    .nav-toggle { display: block; }
+    .admin-links {
+        display: none; position: absolute; left: 0; right: 0; top: 68px;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(4, 6, 13, 0.98); padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(245, 247, 253, 0.1);
+    }
+    .admin-links.open { display: flex; }
+    .admin-link { padding: 0.9rem 5%; }
+    .admin-stats { grid-template-columns: repeat(2, 1fr); }
+    .form-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
