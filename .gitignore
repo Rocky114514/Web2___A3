@@ -1,0 +1,10 @@
+# Dependencies — never commit node_modules.
+node_modules/
+
+# Local secrets — the real .env holds the MySQL password and must stay private.
+.env
+
+# Logs + OS noise.
+*.log
+.DS_Store
+Thumbs.db
