@@ -1,0 +1,14 @@
+{
+  "name": "web2-a3-charity-events",
+  "version": "3.0.0",
+  "description": "PROG2002 A3 — 'Passing the Torch' charity events platform (client + admin + API)",
+  "private": true,
+  "scripts": {
+    "setup:api": "cd api && npm install",
+    "api": "cd api && npm start",
+    "client": "cd client && npx serve",
+    "admin": "cd admin && npx serve"
+  },
+  "author": "Minghe Zhang (24833060)",
+  "license": "MIT"
+}
