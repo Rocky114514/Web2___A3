@@ -1,0 +1,141 @@
+================================================================
+ PROG2002 A3  -  "Passing the Torch" Charity Events Platform
+ Emberlight Foundation  -  client site + admin site + REST API
+ Student: Minghe Zhang (24833060)
+================================================================
+
+THIS API PACKAGE CONTAINS
+    server.js              Express REST API (client + admin endpoints)
+    event_db.js            MySQL connection pool
+    package.json           dependencies
+    package-lock.json      exact dependency versions
+    .env.example           copy to .env and fill in your MySQL details
+    charityevents_db.sql   full database schema + sample data
+    HOW-TO-RUN.txt         this file
+
+The three packages belong together as SIBLING folders:
+
+    <anywhere>\
+    |- client\     (from ...A3-clientside.zip)
+    |- admin\      (from ...A3-adminside.zip)
+    \- api\        (this package)
+
+Please do NOT extract them into one flat folder - the client and
+admin pages link to each other with relative paths.
+
+
+----------------------------------------------------------------
+STEP 1 - Create and import the database
+----------------------------------------------------------------
+Option A - command line:
+
+    cd api
+    mysql -u root -p -e "source charityevents_db.sql"
+
+Option B - MySQL Workbench:
+
+    File > Open SQL Script > charityevents_db.sql > execute
+
+This creates the database charityevents_db with 4 tables,
+12 charity events and 14 registrations.
+
+
+----------------------------------------------------------------
+STEP 2 - Install and configure the API
+----------------------------------------------------------------
+    cd api
+    npm install
+    copy .env.example .env          (macOS/Linux: cp .env.example .env)
+
+Then edit .env so it matches YOUR MySQL server:
+
+    DB_HOST=localhost
+    DB_PORT=3306
+    DB_USER=root
+    DB_PASSWORD=your-mysql-password
+    DB_NAME=charityevents_db
+    PORT=3000
+
+
+----------------------------------------------------------------
+STEP 3 - Start the API
+----------------------------------------------------------------
+    npm start
+
+Expected output:
+
+    Connected to MySQL (charityevents_db)
+    Charity Events API (A3) listening on http://localhost:3000
+
+(The emoji may look garbled in the Windows console - that is harmless.)
+
+Quick test in a browser:
+
+    http://localhost:3000/api/events/home
+    http://localhost:3000/api/events?status=all
+
+
+----------------------------------------------------------------
+STEP 4 - Open the two websites
+----------------------------------------------------------------
+The API must be running first.
+
+    CLIENT SITE (public):  open  ..\client\index.html
+    ADMIN SITE (staff):    open  ..\admin\index.html
+
+For a cleaner setup (recommended), serve the client folder:
+
+    cd ..\client
+    npx serve -l 5500        then browse to http://localhost:5500
+
+
+----------------------------------------------------------------
+IF YOUR API IS NOT ON localhost:3000
+----------------------------------------------------------------
+Change ONE line in each of these two files:
+
+    client\js\config.js         const API_BASE = 'http://localhost:3000';
+    admin\js\admin-common.js    const API_BASE = 'http://localhost:3000';
+
+
+----------------------------------------------------------------
+WHAT TO LOOK FOR (proof that it works)
+----------------------------------------------------------------
+ 1. Client home page lists 8 upcoming events with an animated torch.
+ 2. client\event.html?id=1 shows 4 registrations (newest first) and
+    an event-day weather card.
+ 3. client\register.html?id=1 accepts a new registration and then
+    shows a confirmation screen.
+ 4. admin\index.html lists ALL 12 events, including Past and Suspended.
+ 5. Deleting "Sunrise Dash Fun Run" is REFUSED (it has registrations);
+    deleting "Winter Warmth Community Drive" SUCCEEDS.
+
+
+----------------------------------------------------------------
+TROUBLESHOOTING
+----------------------------------------------------------------
+ Cannot find module 'express'       -> run:  npm install
+ ER_ACCESS_DENIED_ERROR             -> .env missing, or wrong DB_PASSWORD
+ Table 'charityevents_db...'        -> the SQL in STEP 1 was not imported
+ EADDRINUSE :::3000                 -> port busy; stop the other app, or set
+                                       PORT=3001 and update the two
+                                       API_BASE files shown above
+ "Could not load events" on a page  -> the API is not running
+ Staff Admin link broken            -> the folders are not siblings
+
+
+----------------------------------------------------------------
+API ENDPOINTS (for marking)
+----------------------------------------------------------------
+ GET    /api/events/home                      active + upcoming events
+ GET    /api/events?category=&location=&date=&status=
+ GET    /api/events/:id                       event + its registrations
+ GET    /api/events/:id/weather               Open-Meteo forecast
+ GET    /api/categories
+ GET    /api/locations
+ POST   /api/registrations                    create a registration
+ POST   /api/events                           create an event
+ PUT    /api/events/:id                       update an event
+ DELETE /api/events/:id                       delete (blocked if it has
+                                              registrations -> HTTP 409)
+================================================================

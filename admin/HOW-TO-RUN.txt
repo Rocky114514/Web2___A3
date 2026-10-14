@@ -1,0 +1,61 @@
+================================================================
+ ADMIN SITE (staff console)  -  PROG2002 A3
+ "Passing the Torch"  -  Emberlight Foundation
+================================================================
+
+THIS PACKAGE CONTAINS THE STAFF WEBSITE
+    index.html        Dashboard: every event (Active/Past/Suspended)
+                      with registration counts and delete
+    new.html          Create a new charity event
+    edit.html         Update an event, view its registrations, delete
+    css\admin.css     admin design system
+    js\*.js           admin logic (shared form + per-page scripts)
+
+
+----------------------------------------------------------------
+HOW TO RUN
+----------------------------------------------------------------
+The REST API must be running first - see the api package.
+By default it runs at http://localhost:3000.
+
+Then either:
+
+    (a) simply open index.html in a browser, or
+
+    (b) serve this folder and browse to it:
+            npx serve -l 5501      ->  http://localhost:5501
+
+
+----------------------------------------------------------------
+IF THE API IS SOMEWHERE ELSE
+----------------------------------------------------------------
+Edit ONE line in js\admin-common.js:
+
+    const API_BASE = 'http://localhost:3000';
+
+
+----------------------------------------------------------------
+WHAT TO TRY
+----------------------------------------------------------------
+ 1. The dashboard lists ALL events regardless of status.
+ 2. Delete an event that HAS registrations  -> refused, with the
+    reason shown, and nothing is removed (HTTP 409).
+ 3. Delete an event with NO registrations   -> succeeds.
+ 4. New Event: submit with missing fields   -> validation messages
+    (the API validates again on the server).
+ 5. Update Event: pick an event             -> its registrations are
+    listed in full for the staff member.
+
+No authentication is required, as stated in the assessment brief.
+
+
+----------------------------------------------------------------
+NOTES
+----------------------------------------------------------------
+* The same menu appears on every admin page.
+* The two forms share one JavaScript module (js\event-form.js), so
+  the validation rules live in exactly one place.
+* This package is self-contained: no CSS or JavaScript frameworks
+  and no external assets.
+* If a page shows "Could not load events", the API is not running.
+================================================================
